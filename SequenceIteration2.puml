@@ -1,0 +1,42 @@
+@startuml
+
+skinparam sequenceMessageAlign left
+actor Patient as a1
+participant Sundhed.dk as p1
+participant MitID as p2
+participant GP_system as p3
+actor PraktiserendeLæge as a2
+
+autonumber
+a1->p1:Login
+activate a1
+activate p1
+p1->p2: Directed to MitID
+activate p2
+p2-->a1:Login with MitID
+a1->p2:2 factor authentication
+p2-->a1:Login approved
+p2-->p1:Authentication response
+deactivate p2
+p1->p1:redirect
+p1-->a1:Display medicinkortet
+a1->>p1:Needs new prescription
+p1->p3:Requesting new prescription
+activate p3
+p3->>a2:Receives notification
+activate a2
+
+alt Approved
+    a2->>p3:Approves patients request
+    p3-->p1:Request approved
+    p1-->a1:receives notification
+else Declined
+    a2->>p3:Declines patients request
+    deactivate a2
+    p3-->p1:Request declined
+    deactivate p3
+    p1-->a1:receives notification
+    deactivate a1
+    deactivate p1
+end
+@enduml
