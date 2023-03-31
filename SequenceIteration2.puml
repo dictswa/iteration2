@@ -18,7 +18,7 @@ a1->p2:2 factor authentication
 p2-->a1:Login approved
 p2-->p1:Authentication response
 deactivate p2
-p1->p1:redirect
+p1->p1:Redirect
 p1-->a1:Display medicinkortet
 a1->>p1:Needs new prescription
 p1->p3:Requesting new prescription
