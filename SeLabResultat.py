@@ -5,7 +5,9 @@ import sys
 from loginside import ui_login
 
 app = QtWidgets.QApplication(sys.argv)
-MainWindow = ui_login()
+MainWindow = QtWidgets.QMainWindow()
+ui = ui_login()
+ui.setupUi(MainWindow)
 MainWindow.show()
 sys.exit(app.exec())
 

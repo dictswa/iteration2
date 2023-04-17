@@ -86,13 +86,9 @@ class ui_login(QWidget):
 
         if brugernavn in brugere.keys() and kodeord==brugere[brugernavn]: #Conditional checking that the user exists and the password corresponds to the user
             from sogefterpatient import ui_sogefterpatient
-            import sys
-            app = QtWidgets.QApplication(sys.argv)
-            MainWindow = QtWidgets.QMainWindow()
             ui = ui_sogefterpatient()
             ui.setupUi(MainWindow)
             MainWindow.show()
-            app.exec()
         else:
             print('fail')
 
