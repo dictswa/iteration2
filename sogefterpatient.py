@@ -74,8 +74,8 @@ class ui_sogefterpatient(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow_sogefterpatient = QtWidgets.QMainWindow()
+    MainWindow = QtWidgets.QMainWindow()
     ui = ui_sogefterpatient()
-    ui.setupUi(MainWindow_sogefterpatient)
-    MainWindow_sogefterpatient.show()
-    sys.exit(app.exec())
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    app.exec()

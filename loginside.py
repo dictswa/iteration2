@@ -7,12 +7,13 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QApplication,QWidget,QPushButton
 import sys
 
 brugere={'læge1':'kodeord1','læge2':'kodeord2','læge3':'kodeord3'} #definere liste af eksisterende brugere
 
 #widget
-class ui_login(object):
+class ui_login(QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -87,11 +88,11 @@ class ui_login(object):
             from sogefterpatient import ui_sogefterpatient
             import sys
             app = QtWidgets.QApplication(sys.argv)
-            MainWindow_sogefterpatient = QtWidgets.QMainWindow()
+            MainWindow = QtWidgets.QMainWindow()
             ui = ui_sogefterpatient()
-            ui.setupUi(MainWindow_sogefterpatient)
-            MainWindow_sogefterpatient.show()
-            sys.exit(app.exec())
+            ui.setupUi(MainWindow)
+            MainWindow.show()
+            app.exec()
         else:
             print('fail')
 
