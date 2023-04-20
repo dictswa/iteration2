@@ -1,0 +1,106 @@
+@startuml
+
+class Patient{
+Navn: string
+CPR: integer
+Telefon: integer
+Email: string
+Adresse: string
+Diagnoser: string
+Recepter: string
+LabResultat: string
+addDiagnose()
+addRecept()
+removeRecept()
+fornyRecept()
+}
+
+class Læge{
+Navn: string
+ID: integer
+addKonsultation()
+}
+
+class Sekretær{
+Navn: string
+ID: integer
+}
+
+class LabResultat{
+PatientCPR: integer
+Dato: integer
+Tid: integer
+Rekvision: string
+LabOmråde: string
+Kommentar: string
+addResultat()
+addKommentar()
+}
+
+class Recept{
+Dato: integer
+PatientCPR: integer
+LægeID: integer
+Dose: float
+add()
+forny()
+remove()
+}
+
+class Henvisning{
+Dato: integer
+PatientCPR: integer
+LægeID: integer
+Årsag: string
+Klinik: string/integer
+add()
+}
+
+class Journalnotat{
+Dato: integer
+PatientCPR: integer
+Indhold: string
+addNotat()
+}
+
+class JournalnotatLæge{
+LægeID: integer
+Synlig: True/False
+}
+
+class Journal{
+}
+
+class Konsultation{
+Dato: integer
+Tidspunkt: integer
+Titel: string
+PatientCPR: integer
+LægeID: integer
+Årsag: string
+opret()
+}
+
+class Præparat{
+Navn: string
+Type: string
+Koncentration: float
+}
+
+Læge"1..*" -u- "*"Konsultation : opretter
+Sekretær"1..*" -- "*"Konsultation : opretter
+Patient "1"-- "0..1"Journalnotat : skriver
+Patient "1"--"*" Henvisning : henvises
+Patient "1"-r-"*" LabResultat
+Læge "1..*"--"*" LabResultat : skriver kommentar
+Læge "1" -- "1..2"JournalnotatLæge : skriver
+Læge"1..*" -- "*"Henvisning : opretter
+Læge"1..*" -- "*"Recept : udskriver
+
+Journal "1" o-- "*"Konsultation
+Journal "1" o-- "1" Patient
+Konsultation"1" *-- "1..3"Journalnotat
+Recept"1" *-l- "1"Præparat
+
+Journalnotat<|--JournalnotatLæge
+@enduml
