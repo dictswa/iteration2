@@ -7,12 +7,11 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QApplication,QWidget,QPushButton
-import sys
+from PyQt6.QtWidgets import QWidget
 
-brugere={'læge1':'kodeord1','læge2':'kodeord2','læge3':'kodeord3'} #definere liste af eksisterende brugere
+brugere={'læge1':'kodeord1','læge2':'kodeord2','læge3':'kodeord3'} #Defining a dictionary of existing users and their passwords
 
-#widget
+#Widget
 class ui_login(QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -43,7 +42,7 @@ class ui_login(QWidget):
         self.label.setGeometry(QtCore.QRect(20, 20, 311, 31))
         font = QtGui.QFont()
         font.setFamily("Arial Narrow")
-        font.setPointSize(18)
+        font.setPointSize(15)
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
@@ -77,18 +76,18 @@ class ui_login(QWidget):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        #Funktionalitet
+        #Functionality
         self.pushButton_2.released.connect(self.handle_login) #When the button is released the handle_login function will run
-    def handle_login(self):
-        '''function that handles the login process'''
+    def handle_login(self): #Defining the function
+        '''function that handles the login process and opens the next ui'''
         brugernavn=self.lineEdit.text() #Defining login variables
         kodeord=self.lineEdit_2.text()
 
         if brugernavn in brugere.keys() and kodeord==brugere[brugernavn]: #Conditional checking that the user exists and the password corresponds to the user
-            from sogefterpatient import ui_sogefterpatient
-            ui = ui_sogefterpatient()
-            ui.setupUi(MainWindow)
-            MainWindow.show()
+            from sogefterpatient import ui_sogefterpatient #Importing the ui from another file
+            ui = ui_sogefterpatient() #Defining the ui
+            ui.setupUi(MainWindow) #Setting up the ui in the MainWindow
+            ui.show() #Opening the ui in the MainWindow
         else:
             print('fail')
 

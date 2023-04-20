@@ -7,9 +7,11 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QWidget
 
+patienter=['1908765103']
 
-class ui_sogefterpatient(object):
+class ui_sogefterpatient(QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -24,7 +26,7 @@ class ui_sogefterpatient(object):
         self.label.setGeometry(QtCore.QRect(100, 20, 141, 31))
         font = QtGui.QFont()
         font.setFamily("Arial Narrow")
-        font.setPointSize(18)
+        font.setPointSize(17)
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
@@ -61,6 +63,20 @@ class ui_sogefterpatient(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        #Functionality
+        self.pushButton.released.connect(self.handle_search)
+    def handle_search(self):
+        '''Function that handles the search process and opens the front page for the searched patient'''
+        cpr=self.lineEdit.text()
+        if cpr in patienter:
+            from forside import ui_forside  # Importing the ui from another file
+            ui = ui_forside()  # Defining the ui
+            ui.setupUi(MainWindow)  # Setting up the ui in the MainWindow
+            ui.show()  # Opening the ui in the MainWindow
+        else:
+            print('fail')
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
